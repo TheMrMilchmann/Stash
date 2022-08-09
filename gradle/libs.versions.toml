@@ -1,0 +1,18 @@
+[versions]
+bouncycastle = "1.71"
+jna = "5.12.1"
+junit = "5.9.0"
+
+
+[libraries]
+# net.java.dev.jna - JNA
+jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
+jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
+
+# org.bouncycastle:bcprov-jdk18on - BouncyCastle
+bouncycastle = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
+
+# org.junit - JUnit
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
