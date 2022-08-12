@@ -136,4 +136,8 @@ dependencies {
     implementation(libs.jna.platform) {
         artifact { classifier = "jpms" }
     }
+
+
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }
