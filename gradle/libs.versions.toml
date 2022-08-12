@@ -1,4 +1,5 @@
 [versions]
+extra-java-module-info = "0.15"
 jna = "5.12.1"
 junit = "5.9.0"
 
@@ -12,3 +13,6 @@ jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+
+[plugins]
+extra-java-module-info = { id = "de.jjohannes.extra-java-module-info", version.ref = "extra-java-module-info" }

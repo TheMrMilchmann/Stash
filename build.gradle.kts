@@ -26,6 +26,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
+    alias(libs.plugins.extra.java.module.info)
 }
 
 group = "io.github.themrmilchmann.stash"
