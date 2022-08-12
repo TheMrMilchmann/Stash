@@ -45,8 +45,25 @@ java {
 }
 
 tasks {
+    compileJava {
+        options.javaModuleVersion.set("$version")
+        options.release.set(18)
+    }
+
     withType<Test> {
         useJUnitPlatform()
+    }
+
+    javadoc {
+        with(options as StandardJavadocDocletOptions) {
+            tags = listOf(
+                "apiNote:a:API Note:",
+                "implSpec:a:Implementation Requirements:",
+                "implNote:a:Implementation Note:"
+            )
+
+            addStringOption("-release", "18")
+        }
     }
 }
 
