@@ -22,8 +22,9 @@
 package io.github.themrmilchmann.stash;
 
 /**
- * A {@code Storage} instance represents the cold storage for a single secret.
- * Typically,
+ * A {@code Storage} instance represents the storage for a single secret.
+ * Typically, reading from a storage is a destructive operation and callers
+ * should not assume that two successive reads will succeed.
  *
  * @since   0.1.0
  *
@@ -33,6 +34,10 @@ public interface Storage {
 
     /**
      * {@return the bytes in this storage}
+     *
+     * @apiNote Typically, reading from a storage is a destructive operation and
+     *          callers should not assume that two successive reads will
+     *          succeed.
      *
      * @since   0.1.0
      */
