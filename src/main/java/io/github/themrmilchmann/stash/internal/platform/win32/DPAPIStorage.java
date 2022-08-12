@@ -63,6 +63,7 @@ public final class DPAPIStorage implements Storage {
         byte[] bytes = new byte[size];
         this.memory.read(Integer.BYTES, bytes, 0, bytes.length);
         this.memory.clear();
+        this.memory.close();
 
         return bytes;
     }
