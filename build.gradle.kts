@@ -123,7 +123,13 @@ repositories {
     mavenCentral()
 }
 
+extraJavaModuleInfo {
+    automaticModule(libs.jsr305.orNull!!.module.toString(), "jsr305")
+}
+
 dependencies {
+    compileOnlyApi(libs.jsr305)
+
     implementation(libs.jna) {
         artifact { classifier = "jpms" }
     }

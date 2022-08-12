@@ -1,6 +1,7 @@
 [versions]
 extra-java-module-info = "0.15"
 jna = "5.12.1"
+jsr305 = "3.0.2"
 junit = "5.9.0"
 
 
@@ -8,6 +9,9 @@ junit = "5.9.0"
 # net.java.dev.jna - JNA
 jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
 jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
+
+# com.google.code.findbugs:jsr305 - JSR305
+jsr305 = { module = "com.google.code.findbugs:jsr305", version.ref = "jsr305" }
 
 # org.junit - JUnit
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
