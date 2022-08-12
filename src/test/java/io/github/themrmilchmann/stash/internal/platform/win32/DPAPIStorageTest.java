@@ -23,12 +23,15 @@ package io.github.themrmilchmann.stash.internal.platform.win32;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import java.lang.reflect.Field;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@EnabledOnOs(OS.WINDOWS)
 public final class DPAPIStorageTest {
 
     private static final DPAPIStorageFactory factory = new DPAPIStorageFactory();
