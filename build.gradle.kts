@@ -79,36 +79,42 @@ publishing {
             }
         }
     }
-    publications.withType<MavenPublication> {
-        pom {
-            name.set("Stash")
-            description.set("Stash is a Java library that provides capabilities to properly store secrets in memory.")
-            packaging = "jar"
-            url.set("https://github.com/TheMrMilchmann/Stash")
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
 
-            licenses {
+            artifactId = "stash"
+
+            pom {
+                name.set("Stash")
+                description.set("Stash is a Java library that provides capabilities to properly store secrets in memory.")
+                packaging = "jar"
+                url.set("https://github.com/TheMrMilchmann/Stash")
+
                 licenses {
-                    license {
-                        name.set("MIT")
-                        url.set("https://github.com/TheMrMilchmann/Stash/blob/master/LICENSE")
-                        distribution.set("repo")
+                    licenses {
+                        license {
+                            name.set("MIT")
+                            url.set("https://github.com/TheMrMilchmann/Stash/blob/master/LICENSE")
+                            distribution.set("repo")
+                        }
                     }
                 }
-            }
 
-            developers {
-                developer {
-                    id.set("TheMrMilchmann")
-                    name.set("Leon Linhart")
-                    email.set("themrmilchmann@gmail.com")
-                    url.set("https://github.com/TheMrMilchmann")
+                developers {
+                    developer {
+                        id.set("TheMrMilchmann")
+                        name.set("Leon Linhart")
+                        email.set("themrmilchmann@gmail.com")
+                        url.set("https://github.com/TheMrMilchmann")
+                    }
                 }
-            }
 
-            scm {
-                connection.set("scm:git:git://github.com/TheMrMilchmann/Stash.git")
-                developerConnection.set("scm:git:git://github.com/TheMrMilchmann/Stash.git")
-                url.set("https://github.com/TheMrMilchmann/Stash.git")
+                scm {
+                    connection.set("scm:git:git://github.com/TheMrMilchmann/Stash.git")
+                    developerConnection.set("scm:git:git://github.com/TheMrMilchmann/Stash.git")
+                    url.set("https://github.com/TheMrMilchmann/Stash.git")
+                }
             }
         }
     }
