@@ -65,6 +65,9 @@ public final class DPAPIStorage implements Storage {
         this.memory.clear();
         this.memory.close();
 
+        this.memory = null;
+        this.hMemory = null;
+
         return bytes;
     }
 
