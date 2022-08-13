@@ -44,7 +44,7 @@ public final class DPAPIStorageFactory implements StorageFactory<DPAPIStorage> {
          *  migrate to Panama's FFI.
          */
         String os = System.getProperty("os.name");
-        return os.contains("win");
+        return os.contains("win") || os.contains("Win");
     }
 
 }
