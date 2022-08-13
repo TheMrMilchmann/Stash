@@ -35,6 +35,13 @@ jobs:
         run: ./gradlew --stop
 
       - name: Cleanup Gradle Cache
+        if: matrix.os == 'ubuntu-latest'
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
+
+      - name: Cleanup Gradle Cache
+        if: matrix.os == 'windows-latest'
+        run: |
+          rm -fo ~/.gradle/caches/modules-2/modules-2.lock
+          rm -fo ~/.gradle/caches/modules-2/gc.properties
