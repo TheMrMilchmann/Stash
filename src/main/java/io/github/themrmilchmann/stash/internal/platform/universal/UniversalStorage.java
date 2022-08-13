@@ -64,6 +64,8 @@ public final class UniversalStorage implements Storage {
     @Nullable private byte[] iv;
     @Nullable private byte[] data;
 
+    UniversalStorage() {}
+
     @Override
     public void dispose() {
         this.key = null;
