@@ -48,9 +48,39 @@ public final class UniversalStorageTest {
         fieldData = cls.getDeclaredField("data");
         fieldData.setAccessible(true);
     }
+    @Test
+    public void testWriteDispose() throws IllegalAccessException {
+        UniversalStorage storage = factory.create();
+
+        assertNull(fieldKey.get(storage));
+        assertNull(fieldIV.get(storage));
+        assertNull(fieldData.get(storage));
+
+        Random random = new Random();
+
+        byte[] bytes = new byte[100];
+        random.nextBytes(bytes);
+
+        storage.write(bytes);
+
+        byte[] iv, data;
+
+        assertNotNull(fieldKey.get(storage));
+        assertNotNull(iv = (byte[]) fieldIV.get(storage));
+        assertNotNull(data = (byte[]) fieldData.get(storage));
+
+        storage.dispose();
+
+        assertNull(fieldKey.get(storage));
+        assertNull(fieldIV.get(storage));
+        assertNull(fieldData.get(storage));
+
+        for (byte b : iv) assertEquals((byte) 0, b);
+        for (byte b : data) assertEquals((byte) 0, b);
+    }
 
     @Test
-    public void test() throws IllegalAccessException {
+    public void testWriteRead() throws IllegalAccessException {
         UniversalStorage storage = factory.create();
 
         assertNull(fieldKey.get(storage));

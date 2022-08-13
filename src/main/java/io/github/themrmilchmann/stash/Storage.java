@@ -33,6 +33,13 @@ package io.github.themrmilchmann.stash;
 public interface Storage {
 
     /**
+     * Disposes all data of this storage.
+     *
+     * @since   0.1.0
+     */
+    void dispose();
+
+    /**
      * {@return the bytes in this storage}
      *
      * @apiNote Typically, reading from a storage is a destructive operation and

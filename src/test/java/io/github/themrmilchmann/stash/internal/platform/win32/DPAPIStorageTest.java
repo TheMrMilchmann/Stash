@@ -50,7 +50,26 @@ public final class DPAPIStorageTest {
     }
 
     @Test
-    public void test() throws IllegalAccessException {
+    public void testWriteDispose() throws IllegalAccessException {
+        DPAPIStorage storage = factory.create();
+
+        assertNull(fieldMemory.get(storage));
+        assertNull(fieldHMemory.get(storage));
+
+        Random random = new Random();
+
+        byte[] bytes = new byte[100];
+        random.nextBytes(bytes);
+
+        storage.write(bytes);
+        assertNotNull(fieldMemory.get(storage));
+        assertNotNull(fieldHMemory.get(storage));
+
+        storage.dispose();
+    }
+
+    @Test
+    public void testWriteRead() throws IllegalAccessException {
         DPAPIStorage storage = factory.create();
 
         assertNull(fieldMemory.get(storage));

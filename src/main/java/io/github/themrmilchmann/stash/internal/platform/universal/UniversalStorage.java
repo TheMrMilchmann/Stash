@@ -65,6 +65,21 @@ public final class UniversalStorage implements Storage {
     @Nullable private byte[] data;
 
     @Override
+    public void dispose() {
+        this.key = null;
+
+        if (this.iv != null) {
+            Arrays.fill(this.iv, (byte) 0);
+            this.iv = null;
+        }
+
+        if (this.data != null) {
+            Arrays.fill(this.data, (byte) 0);
+            this.data = null;
+        }
+    }
+
+    @Override
     public byte[] read() {
         assert (this.key != null);
         assert (this.iv != null);

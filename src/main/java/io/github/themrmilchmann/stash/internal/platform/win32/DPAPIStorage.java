@@ -48,6 +48,16 @@ public final class DPAPIStorage implements Storage {
     DPAPIStorage() {}
 
     @Override
+    public void dispose() {
+        if (this.memory != null) {
+            this.memory.clear();
+            this.memory.close();
+        }
+
+        this.hMemory = null;
+    }
+
+    @Override
     public byte[] read() {
         assert (this.memory != null);
         assert (this.hMemory != null);
