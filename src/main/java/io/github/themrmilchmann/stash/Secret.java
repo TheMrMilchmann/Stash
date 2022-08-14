@@ -29,7 +29,12 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 
 /**
- * TODO doc
+ * A {@code Secret} represents sensitive information of type {@code T}. Secrets
+ * are strongly tied to and managed by a {@link Stash}.
+ *
+ * <p>To access a secret's value, a lock must be {@link #acquire() acquired}.
+ * Locks provide scoped access to a secret and can be used to query, modify or
+ * dispose it.</p>
  *
  * @param <T>   the type of the secret
  *
@@ -118,7 +123,7 @@ public final class Secret<T> {
     }
 
     /**
-     * TODO doc
+     * A lock provides a scoped access to a {@link Secret}'s value.
      *
      * @since   0.1.0
      */
@@ -149,33 +154,33 @@ public final class Secret<T> {
         }
 
         /**
-         * TODO doc
-         *
-         * @return
+         * {@return the value of the secret}
          *
          * @since   0.1.0
          */
         public Optional<T> get() {
-            // TODO figure out locking
-
-            synchronized (this.releaseLock) {
-                return Optional.ofNullable(Secret.this.data);
+            synchronized (Secret.this.disposeLock) {
+                synchronized (this.releaseLock) {
+                    return Optional.ofNullable(Secret.this.data);
+                }
             }
         }
 
         /**
-         * TODO doc
+         * Sets the value for the secret.
          *
-         * @param value
+         * @param value the value for the secret
+         *
+         * @throws IllegalStateException    if the secret has been disposed, or this lock has been released
          *
          * @since   0.1.0
          */
         public void set(T value) {
             synchronized (Secret.this.disposeLock) {
-                if (Secret.this.isDisposed) throw new IllegalStateException();
+                if (Secret.this.isDisposed) throw new IllegalStateException("Cannot modify a disposed secret");
 
                 synchronized (this.releaseLock) {
-                    if (this.isReleased) throw new IllegalStateException();
+                    if (this.isReleased) throw new IllegalStateException("Cannot use a released lock to access a secret");
 
                     Secret.this.data = Objects.requireNonNull(value);
                 }
@@ -183,9 +188,9 @@ public final class Secret<T> {
         }
 
         /**
-         * TODO doc
+         * Sets the value of the secret if possible.
          *
-         * @param supplier
+         * @param supplier  the {@link Supplier} that supplies the value for the secret
          *
          * @return  whether the secret's value was updated
          *
@@ -207,7 +212,11 @@ public final class Secret<T> {
         /**
          * Releases this lock.
          *
-         * TODO doc
+         * <p>This method does nothing if this lock has already been released or
+         * the secret has already been disposed.</p>
+         *
+         * <p>If this lock is the last lock holding onto the secret, the secret
+         * is deterministically released into storage again.</p>
          *
          * @since   0.1.0
          */
@@ -221,6 +230,7 @@ public final class Secret<T> {
 
                     long locks = Secret.this.locks.decrementAndGet();
                     assert (locks >= 0);
+                    assert (Secret.this.data != null);
 
                     if (locks == 0) {
                         try {
