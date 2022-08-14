@@ -51,6 +51,10 @@ tasks {
         options.release.set(18)
     }
 
+    jar {
+        archiveBaseName.set("stash")
+    }
+
     withType<Test> {
         useJUnitPlatform()
     }
@@ -82,8 +86,6 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-
-            artifactId = "stash"
 
             pom {
                 name.set("Stash")
