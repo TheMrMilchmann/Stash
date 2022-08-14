@@ -87,6 +87,8 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
 
+            artifactId = "stash"
+
             pom {
                 name.set("Stash")
                 description.set("Stash is a Java library that provides capabilities to properly store secrets in memory.")
