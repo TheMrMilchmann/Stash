@@ -47,7 +47,7 @@ public final class Secret<T> {
     private final AtomicLong locks = new AtomicLong();
 
     private final SecretSpec<T> spec;
-    private final io.github.themrmilchmann.stash.Storage storage;
+    private final Storage storage;
     private final Runnable onDispose;
 
     private final Object disposeLock = new Object();
