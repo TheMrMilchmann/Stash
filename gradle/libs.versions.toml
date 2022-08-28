@@ -1,5 +1,5 @@
 [versions]
-extra-java-module-info = "0.15"
+extra-java-module-info = "1.0"
 jna = "5.12.1"
 jsr305 = "3.0.2"
 junit = "5.9.0"
@@ -19,4 +19,5 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.re
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 
 [plugins]
-extra-java-module-info = { id = "de.jjohannes.extra-java-module-info", version.ref = "extra-java-module-info" }
+# org.gradlex:extra-java-module-info - extra-java-module-info
+extra-java-module-info = { id = "org.gradlex.extra-java-module-info", version.ref = "extra-java-module-info" }
